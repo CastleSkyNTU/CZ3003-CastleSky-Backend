@@ -1,21 +1,21 @@
 module.exports = (app) => {
-  const users = require("../controllers/questions.controller.js");
+  const questions = require("../controllers/questions.controller.js");
 
   // Create a new User
-  app.post("/questions", users.create);
+  app.post("/questions", questions.create);
 
   // Retrieve all Users
-  app.get("/usquestionsers", users.findAll);
+  app.get("/questions", questions.findAll);
 
   // Retrieve a single User with userId
-  app.get("/questions/:userId", users.findByID);
+  app.get("/questions/:userId", questions.findByID);
 
   // Update a User with userId
-  app.put("/users/:userId", users.update);
+  app.put("/questions/:userId", questions.update);
 
   // Delete a User with userId
-  app.delete("/users/:userId", users.delete);
+  app.delete("/questions/:userId", questions.delete);
 
   // Create a new User
-  app.delete("/users", users.deleteAll);
+  app.delete("/questions", questions.deleteAll);
 };
