@@ -28,8 +28,8 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all CityScores from the database.
-exports.findAll = (req, res) => {
-  CityScore.getAll((err, data) => {
+exports.loadLeaderBoard = (req, res) => {
+  CityScore.loadLeaderBoard((err, data) => {
     if (err)
       res.status(500).send({
         message:

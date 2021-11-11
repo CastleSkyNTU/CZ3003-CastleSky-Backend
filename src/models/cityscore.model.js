@@ -82,17 +82,20 @@ CityScore.getRandomCityScore = (teamNumber, type, result) => {
   );
 };
 
-CityScore.getAll = (result) => {
-  sql.query("SELECT * FROM cityScores", (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(null, err);
-      return;
-    }
+CityScore.loadLeaderBoard = (result) => {
+  sql.query(
+    "select cityId, CityScore.userId, userName, class, score from CityScore left join User on CityScore.UserId = User.UserId",
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
-    console.log("cityScores: ", res);
-    result(null, res);
-  });
+      console.log("cityScores: ", res);
+      result(null, res);
+    }
+  );
 };
 
 CityScore.updateById = (id, cityScore, result) => {

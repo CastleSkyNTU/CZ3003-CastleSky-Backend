@@ -5,7 +5,7 @@ module.exports = (app) => {
   app.post("/updateScore", cityscores.create);
 
   // Retrieve all Customers
-  app.get("/cityscores", cityscores.findAll);
+  app.get("/loadLeaderBoard", cityscores.loadLeaderBoard);
 
   // Retrieve a single Customer with cardId
   app.get("/cityscores/:cardId", cityscores.findByID);
