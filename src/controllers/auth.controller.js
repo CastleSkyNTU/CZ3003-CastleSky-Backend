@@ -53,35 +53,17 @@ exports.login = async (req, res) => {
       } else {
         console.log(password);
         console.log(await hash(password, 10));
-        const valid = await compare(password, data.password).catch((e) => {
+        const valid = await compare(password, data.PasswordHash).catch((e) => {
           throw "Other Error";
         });
         if (!valid) throw new Error("Password not correct");
-        const accesstoken = createAccessToken(data.id);
-        const refreshtoken = createRefreshToken(data.id);
-
-        // put refresh token in db
-        token = {
-          refreshtoken,
-        };
-        User.updateById(data.id, token, (err, data) => {
-          if (err) {
-            throw err;
-          }
-        });
-
+        console.log(valid);
         console.log(`Updating session for user ${data.name}`);
         req.session.userId = data.name;
 
-        sendRefreshToken(res, refreshtoken);
-        sendAccessToken(
-          res,
-          req,
-          accesstoken,
-          refreshtoken,
-          data.name,
-          data.type
-        );
+        res.send({
+          ID: data.UserId,
+        });
       }
     } catch (err) {
       res.send({
