@@ -7,6 +7,8 @@ module.exports = (app) => {
   // Retrieve all Users
   app.get("/world", world.findAll);
 
+  app.get("/loadCountryCode", world.loadCountryCode);
+
   // Retrieve Top 20 Users
   app.get("/getUserWorlds/:userId", world.getUserWorlds);
 

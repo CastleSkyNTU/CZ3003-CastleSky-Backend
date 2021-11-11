@@ -33,6 +33,10 @@ World.loadWorldData = (worldId, result) => {
         result(err, null);
         return;
       }
+      r = Object.values(JSON.parse(JSON.stringify(res)));
+      // for (key in res[0].keys()) {
+      //   console.log(key);
+      // }
 
       if (res.length) {
         console.log("found world: ", res[0]);
@@ -104,6 +108,22 @@ World.getAll = (result) => {
     console.log("worlds: ", res);
     result(null, res);
   });
+};
+
+World.loadCountryCode = (result) => {
+  sql.query(
+    "select WorldId, WorldName, CountryId, CountryName, CountryAccessCode from World join WorldCountryCity using (WorldId) join CountryCity using (CountryCityId) join Country using (CountryId)",
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("worlds: ", res);
+      result(null, res);
+    }
+  );
 };
 
 World.updateById = (id, world, result) => {

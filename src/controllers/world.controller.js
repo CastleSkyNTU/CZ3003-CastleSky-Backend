@@ -34,6 +34,16 @@ exports.findAll = (req, res) => {
   });
 };
 
+exports.loadCountryCode = (req, res) => {
+  World.loadCountryCode((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving worlds.",
+      });
+    else res.send(data);
+  });
+};
+
 // Find a single World with a worldId
 exports.loadWorldData = (req, res) => {
   World.loadWorldData(req.params.worldId, (err, data) => {
