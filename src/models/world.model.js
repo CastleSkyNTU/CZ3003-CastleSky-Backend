@@ -20,13 +20,13 @@ World.create = (newWorld, result) => {
 
 World.loadWorldData = (worldId, result) => {
   sql.query(
-    `select WorldId, WorldName, CountryId, CountryName, CountryAccessCode, CityId, CityName, Country.MinigameId, MinigameQuestionId
-  from World 
-  join WorldCountryCity using (WorldId)
-  join CountryCity using (CountryCityId)
-  join Country using (CountryId)
-  join City using (CityId)
-  left join MinigameQuestionBank on City.CityId = MinigameQuestionBank.MinigameQuestionBankId where WorldId = ${worldId}`,
+    `select World.WorldId, WorldName, CountryId, CountryName, CountryAccessCode, CityId, CityName, Country.MinigameId, MinigameQuestionId
+    from World 
+    join WorldCountryCity on World.WorldId = WorldCountryCity.WorldId
+    join CountryCity using (CountryCityId)
+    join Country using (CountryId)
+    join City using (CityId)
+    left join MinigameQuestionBank on City.CityId = MinigameQuestionBank.MinigameQuestionBankId where World.WorldId = ${worldId} order by CityId`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -116,11 +116,11 @@ World.getUserWorlds = (userId, result) => {
       }
 
       if (res.length) {
-        data = {}
+        data = {};
         data["userId"] = userId;
         data["Username"] = res[0].UserName;
         worldsArr = [];
-        res.forEach(element => {
+        res.forEach((element) => {
           worldHash = {};
           worldHash["WorldId"] = element.WorldId;
           worldHash["WorldName"] = element.WorldName;
