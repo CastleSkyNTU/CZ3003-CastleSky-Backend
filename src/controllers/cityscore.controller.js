@@ -1,4 +1,4 @@
-const CityScore = require("../models/cityScore.model.js");
+const CityScore = require("../models/cityscore.model.js");
 // Create and Save a new CityScore
 exports.create = async (req, res) => {
   // Validate request
