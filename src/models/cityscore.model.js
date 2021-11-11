@@ -9,6 +9,14 @@ const CityScore = function (cityScore) {
 };
 
 CityScore.create = (newCityScore, result) => {
+  sql.query(
+    "DELETE FROM cityScores WHERE CityId = ? and UserId = ?",
+    newCityScore.CityId,
+    newCityScore.UserId,
+    (err, res) => {
+      console.log("deleted cityScore with id: ", id);
+    }
+  );
   sql.query("INSERT INTO CityScore SET ?", newCityScore, (err, res) => {
     if (err) {
       console.log("error: ", err);
