@@ -34,7 +34,8 @@ const wss = new WebSocket.Server({ server });
 
 require("./routes/user.routes.js")(app);
 require("./routes/auth.routes.js")(app);
-// require("./routes/card.routes.js")(app);
+require("./routes/cityscore.routes.js")(app);
+require("./routes/world.routes.js")(app);
 require("./routes/game.routes.js")(app);
 require("./routes/questions.routes.js")(app);
 require("./routes/download.routes.js")(app);

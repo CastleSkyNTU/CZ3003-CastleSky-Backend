@@ -7,6 +7,7 @@ const User = function (user) {
   this.UserName = user.UserName;
   this.RoleId = user.RoleId;
   this.Class = user.Class;
+  this.SpriteFileName = user.SpriteFileName;
 };
 
 User.create = (newUser, result) => {
@@ -41,9 +42,9 @@ User.findById = (userId, result) => {
   });
 };
 
-User.findByEmail = (email, result) => {
+User.findByEmail = (EmailAddress, result) => {
   sql.query(
-    `SELECT * FROM User WHERE EmailAddress = \"${email}\"`,
+    `SELECT * FROM User WHERE EmailAddress = \"${EmailAddress}\"`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -65,7 +66,7 @@ User.findByEmail = (email, result) => {
 
 User.getTop20 = (result) => {
   sql.query(
-    "SELECT id,name, score FROM User ORDER BY score DESC LIMIT 20",
+    "SELECT id,UserName, SpriteFileName FROM User ORDER BY SpriteFileName DESC LIMIT 20",
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -93,7 +94,7 @@ User.getAll = (result) => {
 };
 
 User.updateById = (id, user, result) => {
-  sql.query(`SELECT * FROM User WHERE id = ${id}`, (err, res) => {
+  sql.query(`SELECT * FROM User WHERE UserId = ${id}`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -101,15 +102,14 @@ User.updateById = (id, user, result) => {
     }
 
     sql.query(
-      "UPDATE User SET email = ?, name = ?, password=?, score = ?, type = ?, refreshtoken = ?, resettoken = ? WHERE id = ?",
+      "UPDATE User SET EmailAddress = ?, UserName = ?, PasswordHash=?, SpriteFileName = ?, RoleId = ?, Class = ? WHERE UserId = ?",
       [
-        user.email ? user.email : res[0].email,
-        user.name ? user.name : res[0].name,
-        user.password ? user.password : res[0].password,
-        user.score ? user.score : res[0].score,
-        user.type ? user.type : res[0].type,
-        user.refreshtoken ? user.refreshtoken : res[0].refreshtoken,
-        user.resettoken ? user.resettoken : res[0].resettoken,
+        user.EmailAddress ? user.EmailAddress : res[0].EmailAddress,
+        user.UserName ? user.UserName : res[0].UserName,
+        user.PasswordHash ? user.PasswordHash : res[0].PasswordHash,
+        user.SpriteFileName ? user.SpriteFileName : res[0].SpriteFileName,
+        user.RoleId ? user.RoleId : res[0].RoleId,
+        user.Class ? user.Class : res[0].Class,
         id,
       ],
       (err, res) => {

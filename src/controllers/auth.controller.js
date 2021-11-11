@@ -61,9 +61,7 @@ exports.login = async (req, res) => {
         console.log(`Updating session for user ${data.name}`);
         req.session.userId = data.name;
 
-        res.send({
-          ID: data.UserId,
-        });
+        res.send(data);
       }
     } catch (err) {
       res.send({
