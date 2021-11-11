@@ -37,10 +37,65 @@ World.loadWorldData = (worldId, result) => {
       // for (key in res[0].keys()) {
       //   console.log(key);
       // }
+      dat = {
+        WorldId: res[0].WorldId,
+        WorldName: res[0].WorldName,
+        Countries: [],
+      };
+
+      console.log(res);
+      r.forEach((entry) => {
+        // console.log(entry);
+        var found = dat.Countries.find(
+          (el) => el.CountryId === entry.CountryId
+        );
+        if (!found) {
+          countrydata = {
+            CountryId: entry.CountryId,
+            CountryName: entry.CountryName,
+            CountryAccessCode: entry.CountryAccessCode,
+            Cities: [
+              {
+                CityId: entry.CityId,
+                CityName: entry.CityName,
+                Minigame: [
+                  {
+                    MinigameId: entry.MinigameId,
+                    MinigameQuestionId: entry.MinigameQuestionId,
+                  },
+                ],
+              },
+            ],
+          };
+          dat.Countries.push(countrydata);
+        } else {
+          // console.log(found);
+          var cityfound = found.Cities.find((el) => el.CityId === entry.CityId);
+          if (!cityfound) {
+            citydata = {
+              CityId: entry.CityId,
+              CityName: entry.CityName,
+              Minigame: [
+                {
+                  MinigameId: entry.MinigameId,
+                  MinigameQuestionId: entry.MinigameQuestionId,
+                },
+              ],
+            };
+            found.Cities.push(citydata);
+          } else {
+            minigamedata = {
+              MinigameId: entry.MinigameId,
+              MinigameQuestionId: entry.MinigameQuestionId,
+            };
+            cityfound.Cities.push(minigamedata);
+          }
+        }
+      });
 
       if (res.length) {
-        console.log("found world: ", res[0]);
-        result(null, res);
+        console.log("found world: ", dat);
+        result(null, dat);
         return;
       }
 
