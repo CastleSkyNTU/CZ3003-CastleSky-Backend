@@ -36,7 +36,7 @@ World.loadWorldData = (worldId, result) => {
 
       if (res.length) {
         console.log("found world: ", res[0]);
-        result(null, res[0]);
+        result(null, res);
         return;
       }
 
