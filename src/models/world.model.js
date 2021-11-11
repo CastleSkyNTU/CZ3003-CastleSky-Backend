@@ -61,11 +61,17 @@ World.getUserWorlds = (userId, result) => {
       }
 
       if (res.length) {
-        data = {
-          userId: userId,
-          Username: res[0].UserName,
-          Worlds: res,
-        };
+        data = {}
+        data["userId"] = userId;
+        data["Username"] = res[0].UserName;
+        worldsArr = [];
+        res.forEach(element => {
+          worldHash = {};
+          worldHash["WorldId"] = element.WorldId;
+          worldHash["WorldName"] = element.WorldName;
+          worldsArr.push(worldHash);
+        });
+        data["Worlds"] = worldsArr;
         result(null, data);
         return;
       }

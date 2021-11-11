@@ -74,7 +74,9 @@ exports.getUserWorlds = (req, res) => {
           message: "Error retrieving World with id " + req.params.userId,
         });
       }
-    } else res.send(data);
+    } else {
+      res.send(data);
+    }
   });
 };
 
