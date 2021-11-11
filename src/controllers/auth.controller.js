@@ -25,11 +25,11 @@ exports.register = async (req, res) => {
   const hashpassword = await hash(req.body.password, 10);
   // Create a User
   const user = new User({
-    email: req.body.email,
-    name: req.body.name,
-    password: hashpassword,
-    score: 0,
-    type: "user",
+    EmailAddress: req.body.email,
+    UserName: req.body.name,
+    PasswordHash: hashpassword,
+    RoleId: 0,
+    Class: "user",
   });
 
   // Save User in the database
