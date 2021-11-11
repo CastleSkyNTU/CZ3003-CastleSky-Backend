@@ -19,22 +19,31 @@ World.create = (newWorld, result) => {
 };
 
 World.loadWorldData = (worldId, result) => {
-  sql.query(`SELECT * FROM worlds WHERE id = ${worldId}`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    `select WorldId, WorldName, CountryId, CountryName, CountryAccessCode, CityId, CityName, Country.MinigameId, MinigameQuestionId
+  from World 
+  join WorldCountryCity using (WorldId)
+  join CountryCity using (CountryCityId)
+  join Country using (CountryId)
+  join City using (CityId)
+  left join MinigameQuestionBank on City.CityId = MinigameQuestionBank.MinigameQuestionBankId where WorldId = ${worldId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
 
-    if (res.length) {
-      console.log("found world: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
+      if (res.length) {
+        console.log("found world: ", res[0]);
+        result(null, res[0]);
+        return;
+      }
 
-    // not found World with the id
-    result({ kind: "not_found" }, null);
-  });
+      // not found World with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
 };
 
 World.getUserWorlds = (userId, result) => {
