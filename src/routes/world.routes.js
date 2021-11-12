@@ -12,6 +12,8 @@ module.exports = (app) => {
   // Retrieve Top 20 Users
   app.get("/getUserWorlds/:userId", world.getUserWorlds);
 
+  app.get("/getClassWorlds/:className", world.getClassWorlds);
+
   // Retrieve a single User with userId
   app.get("/loadWorldData/:worldId", world.loadWorldData);
 

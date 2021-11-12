@@ -137,6 +137,31 @@ World.getUserWorlds = (userId, result) => {
   );
 };
 
+World.getClassWorlds = (classId, result) => {
+  sql.query(
+    `SELECT WorldName FROM WorldClass join World using (WorldId) where ClassId = 1`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        worldArr=[]
+        res.forEach((element)=>{
+          worldArr.push(element.WorldName);
+        })
+        result(null, worldArr);
+        return;
+      }
+
+      // not found World with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
 World.getRandomWorld = (teamNumber, type, result) => {
   sql.query(
     `SELECT * FROM worlds WHERE type = \"${type}\" ORDER BY RAND() LIMIT ${teamNumber}`,

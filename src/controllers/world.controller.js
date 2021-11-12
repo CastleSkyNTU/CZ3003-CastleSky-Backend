@@ -132,3 +132,27 @@ exports.deleteAll = (req, res) => {
     else res.send({ message: `All Worlds were deleted successfully!` });
   });
 };
+
+
+exports.getClassWorlds = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  World.getClassWorlds(req.params.className, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found World with id ${req.params.className}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Error getting Worlds with class id " + req.params.className,
+        });
+      }
+    } else res.send(data);
+  });
+};
