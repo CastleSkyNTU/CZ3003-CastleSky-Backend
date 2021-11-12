@@ -7,7 +7,7 @@ const User = function (user) {
   this.UserName = user.UserName;
   this.RoleId = user.RoleId;
   this.Class = user.Class;
-  this.SpriteFileName = user.SpriteFileName;
+  this.CharacterName = user.CharacterName;
 };
 
 User.create = (newUser, result) => {
