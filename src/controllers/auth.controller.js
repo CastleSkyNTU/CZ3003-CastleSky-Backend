@@ -28,8 +28,8 @@ exports.register = async (req, res) => {
     EmailAddress: req.body.email,
     UserName: req.body.name,
     PasswordHash: hashpassword,
-    RoleId: 0,
-    Class: "2A",
+    RoleId: req.body.RoleId,
+    Class: req.body.Class,
   });
 
   // Save User in the database
