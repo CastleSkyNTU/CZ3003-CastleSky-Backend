@@ -82,7 +82,7 @@ User.getTop20 = (result) => {
 
 User.findClasses = (result) => {
   sql.query(
-    "SELECT class FROM User",
+    "select distinct ClassName from User join Class using (ClassId)",
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -91,7 +91,7 @@ User.findClasses = (result) => {
       }
       listOfClasses = []
       res.forEach((element) => {
-        listOfClasses.push(element.class)
+        listOfClasses.push(element)
       })
       result(null, listOfClasses);
     }
