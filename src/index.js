@@ -39,7 +39,7 @@ require("./routes/world.routes.js")(app);
 require("./routes/game.routes.js")(app);
 require("./routes/questions.routes.js")(app);
 require("./routes/download.routes.js")(app);
-
+require("./routes/country.routes.js")(app);
 server.listen(process.env.PORT, () =>
   console.log(`Server listening on port ${process.env.PORT}`)
 );

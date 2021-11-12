@@ -215,16 +215,21 @@ World.getRandomWorld = (teamNumber, type, result) => {
   );
 };
 
+//idk where else this is being used, but i'm using it for leaderboard and accesscode
 World.getAll = (result) => {
-  sql.query("SELECT * FROM worlds", (err, res) => {
+  sql.query("SELECT * FROM World", (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
 
+    worldsArr = [];
+    res.forEach((element) =>
+      worldsArr.push(element.WorldName)
+    )
     console.log("worlds: ", res);
-    result(null, res);
+    result(null, worldsArr);
   });
 };
 
