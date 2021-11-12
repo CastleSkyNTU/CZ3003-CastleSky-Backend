@@ -10,8 +10,8 @@ const CityScore = function (cityScore) {
 
 CityScore.create = (newCityScore, result) => {
   sql.query(
-    "DELETE FROM cityScores WHERE CityId = ? and UserId = ?",
-    newCityScore.CityId,
+    "DELETE FROM cityScores WHERE CountryId = ? and UserId = ?",
+    newCityScore.CountryId,
     newCityScore.UserId,
     (err, res) => {
       console.log("deleted cityScore with id: ", id);
@@ -92,7 +92,7 @@ CityScore.getRandomCityScore = (teamNumber, type, result) => {
 
 CityScore.loadLeaderBoard = (result) => {
   sql.query(
-    "select cityId, CityScore.userId, userName, classId, score from CityScore left join User on CityScore.UserId = User.UserId",
+    "select CountryId, CityScore.userId, userName, classId, score from CityScore left join User on CityScore.UserId = User.UserId",
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -110,7 +110,7 @@ CityScore.loadLeaderBoardByCountry = (CountryName,result) => {
   CountryName = CountryName.split('_').join(' ')
   sql.query(
     `select UserName, Score from CityScore
-    join CountryCity using (CityId)
+    join CountryCity using (CountryId)
     join Country using (CountryId)
     join User using (UserId)
     where CountryName = \"${CountryName}\"
@@ -133,7 +133,7 @@ CityScore.getSummaryReport = (CountryName, ClassName, result) => {
   CountryName = CountryName.split('_').join(' ')
   sql.query(
     `select UserName, Score from CityScore 
-    join CountryCity using (CityId)
+    join CountryCity using (CountryId)
     join Country using (CountryId)
     join User using (UserId)
     join Class using (ClassId)
