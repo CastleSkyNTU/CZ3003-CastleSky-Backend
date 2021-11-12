@@ -92,7 +92,7 @@ CityScore.getRandomCityScore = (teamNumber, type, result) => {
 
 CityScore.loadLeaderBoard = (result) => {
   sql.query(
-    "select cityId, CityScore.userId, userName, class, score from CityScore left join User on CityScore.UserId = User.UserId",
+    "select cityId, CityScore.userId, userName, classId, score from CityScore left join User on CityScore.UserId = User.UserId",
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -101,6 +101,29 @@ CityScore.loadLeaderBoard = (result) => {
       }
 
       console.log("cityScores: ", res);
+      result(null, res);
+    }
+  );
+};
+
+CityScore.loadLeaderBoardByCountry = (CountryName,result) => {
+  CountryName = CountryName.split('_').join(' ')
+  sql.query(
+    `select UserName, Score from CityScore
+    join CountryCity using (CityId)
+    join Country using (CountryId)
+    join User using (UserId)
+    where CountryName = \"${CountryName}\"
+    group by UserId
+    order by Score desc`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("leaderboard by country: ", res);
       result(null, res);
     }
   );
