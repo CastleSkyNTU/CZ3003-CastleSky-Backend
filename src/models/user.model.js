@@ -93,6 +93,25 @@ User.getTop20 = (result) => {
   );
 };
 
+User.findClasses = (result) => {
+  sql.query(
+    "SELECT class FROM User",
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      listOfClasses = []
+      res.forEach((element) => {
+        listOfClasses.push(element.class)
+      })
+      result(null, listOfClasses);
+    }
+  );
+};
+
+
 User.getAll = (result) => {
   sql.query("SELECT * FROM User", (err, res) => {
     if (err) {

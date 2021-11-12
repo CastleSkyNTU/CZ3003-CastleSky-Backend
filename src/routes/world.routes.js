@@ -12,6 +12,12 @@ module.exports = (app) => {
   // Retrieve Top 20 Users
   app.get("/getUserWorlds/:userId", world.getUserWorlds);
 
+  // Retrieve the worlds a class has access to
+  app.get("/getClassWorlds/:className", world.getClassWorlds);
+
+  // Retrieve the countries the world has
+  app.get("/getWorldCountries/:worldName", world.getWorldCountries);
+
   // Retrieve a single User with userId
   app.get("/loadWorldData/:worldId", world.loadWorldData);
 

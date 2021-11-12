@@ -132,3 +132,15 @@ exports.deleteAll = (req, res) => {
     else res.send({ message: `All CityScores were deleted successfully!` });
   });
 };
+
+// Get Summary Report for a country and class
+exports.getSummaryReport = (req, res) => {
+  CityScore.getSummaryReport(req.params.CountryName, req.params.ClassName, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while getting summary report",
+      });
+    else res.send(data);
+  });
+};

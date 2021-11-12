@@ -137,6 +137,63 @@ World.getUserWorlds = (userId, result) => {
   );
 };
 
+World.getClassWorlds = (className, result) => {
+  sql.query(
+    `SELECT WorldName FROM db_castlesky.WorldClass 
+    join World using (WorldId)
+    join Class using (ClassId)
+    where ClassName = \"${className}\"`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        worldArr=[]
+        res.forEach((element)=>{
+          worldArr.push(element.WorldName);
+        })
+        result(null, worldArr);
+        return;
+      }
+
+      // not found World with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
+World.getWorldCountries = (worldName, result) => {
+  sql.query(
+    `select distinct CountryName from World
+    join WorldCountryCity using (WorldId)
+    join CountryCity using (CountryCityId)
+    join Country using (CountryId)
+    where WorldName = \"${worldName}\"`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        countryArr=[]
+        res.forEach((element)=>{
+          countryArr.push(element.CountryName);
+        })
+        result(null, countryArr);
+        return;
+      }
+
+      // not found World with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
 World.getRandomWorld = (teamNumber, type, result) => {
   sql.query(
     `SELECT * FROM worlds WHERE type = \"${type}\" ORDER BY RAND() LIMIT ${teamNumber}`,

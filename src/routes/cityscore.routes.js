@@ -7,6 +7,9 @@ module.exports = (app) => {
   // Retrieve all Customers
   app.get("/loadLeaderBoard", cityscores.loadLeaderBoard);
 
+  // Retrieve summary report
+  app.get("/getSummaryReport/:CountryName/:ClassName", cityscores.getSummaryReport);
+
   // Retrieve a single Customer with cardId
   app.get("/cityscores/:cardId", cityscores.findByID);
 

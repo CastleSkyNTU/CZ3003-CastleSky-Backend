@@ -50,6 +50,19 @@ exports.findTop20 = (req, res) => {
   });
 };
 
+// Retrieve list of classes
+exports.findClasses = (req, res) => {
+  User.findClasses((err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some error occurred while retrieving users.",
+      });
+    else {
+      res.send(data);
+    }
+  });
+};
+
 // Find a single User with a userId
 exports.findByID = (req, res) => {
   User.findById(req.params.userId, (err, data) => {
