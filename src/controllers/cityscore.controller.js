@@ -144,3 +144,15 @@ exports.getSummaryReport = (req, res) => {
     else res.send(data);
   });
 };
+
+
+exports.loadLeaderBoardByCountry = (req, res) => {
+  CityScore.loadLeaderBoardByCountry(req.params.CountryName, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while getting leaderboard",
+      });
+    else res.send(data);
+  });
+};

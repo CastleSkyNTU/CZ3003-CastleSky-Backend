@@ -10,6 +10,9 @@ module.exports = (app) => {
   // Retrieve summary report
   app.get("/getSummaryReport/:CountryName/:ClassName", cityscores.getSummaryReport);
 
+  // Retrieve leaderboard
+  app.get("/getLeaderboardByCountry/:CountryName", cityscores.loadLeaderBoardByCountry);
+
   // Retrieve a single Customer with cardId
   app.get("/cityscores/:cardId", cityscores.findByID);
 
