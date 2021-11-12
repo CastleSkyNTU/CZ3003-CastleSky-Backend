@@ -6,14 +6,15 @@ const User = function (user) {
   this.PasswordHash = user.PasswordHash;
   this.UserName = user.UserName;
   this.RoleId = user.RoleId;
-  this.Class = user.Class;
+  this.ClassId = user.Class;
   this.CharacterName = user.CharacterName;
 };
 
 User.create = (newUser, result) => {
+  console.log(newUser.ClassId);
   sql.query(
     "select ClassId from Class where ClassName = ?",
-    newUser.Class,
+    newUser.ClassId,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -21,7 +22,7 @@ User.create = (newUser, result) => {
         return;
       }
       console.log(res);
-      newUser.Class = res[0].ClassId;
+      newUser.ClassId = res[0].ClassId;
       sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -102,15 +103,14 @@ User.findClasses = (result) => {
         result(null, err);
         return;
       }
-      listOfClasses = []
+      listOfClasses = [];
       res.forEach((element) => {
-        listOfClasses.push(element.ClassName)
-      })
+        listOfClasses.push(element.ClassName);
+      });
       result(null, listOfClasses);
     }
   );
 };
-
 
 User.getAll = (result) => {
   sql.query("SELECT * FROM User", (err, res) => {
