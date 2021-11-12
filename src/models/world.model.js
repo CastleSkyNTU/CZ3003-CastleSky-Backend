@@ -137,9 +137,12 @@ World.getUserWorlds = (userId, result) => {
   );
 };
 
-World.getClassWorlds = (classId, result) => {
+World.getClassWorlds = (className, result) => {
   sql.query(
-    `SELECT WorldName FROM WorldClass join World using (WorldId) where ClassId = 1`,
+    `SELECT WorldName FROM db_castlesky.WorldClass 
+    join World using (WorldId)
+    join Class using (ClassId)
+    where ClassName = \"${className}\"`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
