@@ -60,7 +60,9 @@ exports.login = async (req, res) => {
         console.log(valid);
         console.log(`Updating session for user ${data.name}`);
         req.session.userId = data.name;
-
+        delete data["PasswordHash"];
+        delete data["EmailAddress"];
+        // data.remove("PasswordHash");
         res.send(data);
       }
     } catch (err) {
