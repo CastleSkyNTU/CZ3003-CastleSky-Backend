@@ -106,6 +106,30 @@ CityScore.loadLeaderBoard = (result) => {
   );
 };
 
+CityScore.getSummaryReport = (CountryName, ClassName, result) => {
+  CountryName = CountryName.split('_').join(' ')
+  sql.query(
+    `select UserName, Score from CityScore 
+    join CountryCity using (CityId)
+    join Country using (CountryId)
+    join User using (UserId)
+    join Class using (ClassId)
+    where ClassName = \"${ClassName}\" and CountryName = \"${CountryName}\"
+    group by UserId
+    order by Score desc`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      console.log("cityScores: ", res);
+      result(null, res);
+    }
+  );
+};
+
 CityScore.updateById = (id, cityScore, result) => {
   sql.query(`SELECT * FROM cityScores WHERE id = ${id}`, (err, res) => {
     if (err) {

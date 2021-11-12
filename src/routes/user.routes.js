@@ -10,6 +10,9 @@ module.exports = (app) => {
   // Retrieve Top 20 Users
   app.get("/userstop20", users.findTop20);
 
+  // Retrieve list of classes
+  app.get("/userClasses", users.findClasses);
+
   // Retrieve a single User with userId
   app.get("/users/:userId", users.findByID);
 
