@@ -6,14 +6,15 @@ const User = function (user) {
   this.PasswordHash = user.PasswordHash;
   this.UserName = user.UserName;
   this.RoleId = user.RoleId;
-  this.Class = user.Class;
+  this.ClassId = user.Class;
   this.CharacterName = user.CharacterName;
 };
 
 User.create = (newUser, result) => {
+  console.log(newUser.ClassId);
   sql.query(
     "select ClassId from Class where ClassName = ?",
-    newUser.Class,
+    newUser.ClassId,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -21,7 +22,7 @@ User.create = (newUser, result) => {
         return;
       }
       console.log(res);
-      newUser.Class = res[0].ClassId;
+      newUser.ClassId = res[0].ClassId;
       sql.query("INSERT INTO User SET ?", newUser, (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -102,15 +103,14 @@ User.findClasses = (result) => {
         result(null, err);
         return;
       }
-      listOfClasses = []
+      listOfClasses = [];
       res.forEach((element) => {
-        listOfClasses.push(element.ClassName)
-      })
+        listOfClasses.push(element.ClassName);
+      });
       result(null, listOfClasses);
     }
   );
 };
-
 
 User.getAll = (result) => {
   sql.query("SELECT * FROM User", (err, res) => {
@@ -134,14 +134,14 @@ User.updateById = (id, user, result) => {
     }
 
     sql.query(
-      "UPDATE User SET EmailAddress = ?, UserName = ?, PasswordHash=?, SpriteFileName = ?, RoleId = ?, Class = ? WHERE UserId = ?",
+      "UPDATE User SET EmailAddress = ?, UserName = ?, PasswordHash=?, CharacterName = ?, RoleId = ?, ClassId = ? WHERE UserId = ?",
       [
         user.EmailAddress ? user.EmailAddress : res[0].EmailAddress,
         user.UserName ? user.UserName : res[0].UserName,
         user.PasswordHash ? user.PasswordHash : res[0].PasswordHash,
-        user.SpriteFileName ? user.SpriteFileName : res[0].SpriteFileName,
+        user.CharacterName ? user.CharacterName : res[0].CharacterName,
         user.RoleId ? user.RoleId : res[0].RoleId,
-        user.Class ? user.Class : res[0].Class,
+        user.ClassId ? user.ClassId : res[0].ClassId,
         id,
       ],
       (err, res) => {
