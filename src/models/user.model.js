@@ -104,7 +104,7 @@ User.findClasses = (result) => {
       }
       listOfClasses = []
       res.forEach((element) => {
-        listOfClasses.push(element)
+        listOfClasses.push(element.ClassName)
       })
       result(null, listOfClasses);
     }
