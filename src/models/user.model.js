@@ -134,12 +134,12 @@ User.updateById = (id, user, result) => {
     }
 
     sql.query(
-      "UPDATE User SET EmailAddress = ?, UserName = ?, PasswordHash=?, SpriteFileName = ?, RoleId = ?, Class = ? WHERE UserId = ?",
+      "UPDATE User SET EmailAddress = ?, UserName = ?, PasswordHash=?, CharacterName = ?, RoleId = ?, Class = ? WHERE UserId = ?",
       [
         user.EmailAddress ? user.EmailAddress : res[0].EmailAddress,
         user.UserName ? user.UserName : res[0].UserName,
         user.PasswordHash ? user.PasswordHash : res[0].PasswordHash,
-        user.SpriteFileName ? user.SpriteFileName : res[0].SpriteFileName,
+        user.CharacterName ? user.CharacterName : res[0].CharacterName,
         user.RoleId ? user.RoleId : res[0].RoleId,
         user.Class ? user.Class : res[0].Class,
         id,
