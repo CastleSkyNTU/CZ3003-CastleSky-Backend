@@ -165,6 +165,34 @@ World.getClassWorlds = (className, result) => {
   );
 };
 
+World.getStudentWorlds = (userId, result) => {
+  sql.query(
+    `select WorldName from User
+    join WorldClass using (ClassId)
+    join World using (WorldId)
+    where UserId = ${userId}`,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+
+      if (res.length) {
+        worldArr=[]
+        res.forEach((element)=>{
+          worldArr.push(element.WorldName);
+        })
+        result(null, worldArr);
+        return;
+      }
+
+      // not found World with the id
+      result({ kind: "not_found" }, null);
+    }
+  );
+};
+
 World.getWorldCountries = (worldName, result) => {
   sql.query(
     `select distinct CountryName from World

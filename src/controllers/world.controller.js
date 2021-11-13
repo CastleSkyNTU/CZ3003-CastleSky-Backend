@@ -157,6 +157,29 @@ exports.getClassWorlds = (req, res) => {
   });
 };
 
+exports.getStudentWorlds = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+
+  World.getStudentWorlds(req.params.userId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with id ${req.params.userId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Error getting Worlds with user id " + req.params.userId,
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 exports.getWorldCountries = (req, res) => {
   // Validate Request
   if (!req.body) {
