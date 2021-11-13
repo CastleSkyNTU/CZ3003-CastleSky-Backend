@@ -9,16 +9,32 @@ const CityScore = function (cityScore) {
 };
 
 CityScore.create = (newCityScore, result) => {
-  sql.query("INSERT INTO CityScore SET ?", newCityScore, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
+  sql.query(
+    "select CountryId from Country where CountryName = ?",
+    newCityScore.CountryId,
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log(res);
+      newCityScore.CountryId = res[0].CountryId;
+      sql.query("INSERT INTO CityScore SET ?", newCityScore, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
 
-    console.log("created cityScore: ", { id: res.insertId, ...newCityScore });
-    result(null, { id: res.insertId, ...newCityScore });
-  });
+        console.log("created cityScore: ", {
+          id: res.insertId,
+          ...newCityScore,
+        });
+        result(null, { id: res.insertId, ...newCityScore });
+      });
+    }
+  );
 };
 
 CityScore.findById = (cityScoreId, result) => {

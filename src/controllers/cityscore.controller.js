@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
 
   // Create a CityScore
   const cityScore = new CityScore({
-    CountryId: req.body.countryId,
+    CountryId: req.body.countryName,
     UserId: req.body.userId,
     Score: req.body.score,
     Date: new Date(),
