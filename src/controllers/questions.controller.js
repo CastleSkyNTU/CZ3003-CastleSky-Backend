@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
 
 // Find a single QuestionBank with a questionBankId
 exports.findByID = (req, res) => {
-  QuestionBank.findById(req.params.questionBankId, (err, data) => {
+  QuestionBank.findById(req.params.questionId, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
