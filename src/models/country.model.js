@@ -15,7 +15,7 @@ Country.accessCode = (CountryName,result) => {
     }
 
     if (res.length == 1) {
-      result(null, res[0].CountryAccessCode);
+      result(null, [res[0].CountryAccessCode]);
       return;
     }
 
