@@ -27,9 +27,9 @@ QuestionBank.create = (newQuestionBank, result) => {
   );
 };
 
-QuestionBank.findById = (questionBankId, result) => {
+QuestionBank.findById = (questionId, result) => {
   sql.query(
-    `SELECT * FROM MinigameQuestionBank WHERE id = ${questionBankId}`,
+    `SELECT * FROM MinigameQuestionBank WHERE MinigameQuestionId = ${questionId}`,
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -39,7 +39,10 @@ QuestionBank.findById = (questionBankId, result) => {
 
       if (res.length) {
         console.log("found MinigameQuestionBank: ", res[0]);
-        result(null, res[0]);
+        data = {}
+        data.Questions = res[0].Questions
+        data.Answers = res[0].Answers
+        result(null, data);
         return;
       }
 

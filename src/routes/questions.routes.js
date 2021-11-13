@@ -7,8 +7,8 @@ module.exports = (app) => {
   // Retrieve all Users
   app.get("/questions", questions.findAll);
 
-  // Retrieve a single User with userId
-  app.get("/questions/:userId", questions.findByID);
+  // Retrieve a single question with questionId
+  app.get("/questions/:questionId", questions.findByID);
 
   // Update a User with userId
   app.put("/questions/:userId", questions.update);
