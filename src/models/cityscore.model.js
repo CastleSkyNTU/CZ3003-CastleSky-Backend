@@ -2,7 +2,7 @@ const sql = require("./db.js");
 
 // constructor
 const CityScore = function (cityScore) {
-  this.CityId = cityScore.CityId;
+  this.CountryId = cityScore.CountryId;
   this.UserId = cityScore.UserId;
   this.Score = cityScore.Score;
   this.Date = cityScore.Date;

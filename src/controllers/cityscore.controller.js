@@ -10,7 +10,7 @@ exports.create = async (req, res) => {
 
   // Create a CityScore
   const cityScore = new CityScore({
-    CityId: req.body.cityId,
+    CountryId: req.body.countryId,
     UserId: req.body.userId,
     Score: req.body.score,
     Date: new Date(),
@@ -135,23 +135,25 @@ exports.deleteAll = (req, res) => {
 
 // Get Summary Report for a country and class
 exports.getSummaryReport = (req, res) => {
-  CityScore.getSummaryReport(req.params.CountryName, req.params.ClassName, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while getting summary report",
-      });
-    else res.send(data);
-  });
+  CityScore.getSummaryReport(
+    req.params.CountryName,
+    req.params.ClassName,
+    (err, data) => {
+      if (err)
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while getting summary report",
+        });
+      else res.send(data);
+    }
+  );
 };
-
 
 exports.loadLeaderBoardByCountry = (req, res) => {
   CityScore.loadLeaderBoardByCountry(req.params.CountryName, (err, data) => {
     if (err)
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while getting leaderboard",
+        message: err.message || "Some error occurred while getting leaderboard",
       });
     else res.send(data);
   });
