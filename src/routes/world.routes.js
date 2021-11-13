@@ -15,6 +15,9 @@ module.exports = (app) => {
   // Retrieve the worlds a class has access to
   app.get("/getClassWorlds/:className", world.getClassWorlds);
 
+  // Retrieve the worlds a student has access to
+  app.get("/getStudentWorlds/:userId", world.getStudentWorlds);
+
   // Retrieve the countries the world has
   app.get("/getWorldCountries/:worldName", world.getWorldCountries);
 
