@@ -7,10 +7,6 @@ const WebSocket = require("ws");
 const session = require("express-session");
 const fs = require("fs");
 
-var privateKey = fs.readFileSync("sslcert/server.key", "utf8");
-var certificate = fs.readFileSync("sslcert/server.crt", "utf8");
-var credentials = { key: privateKey, cert: certificate };
-
 const app = express();
 
 const sessionParser = session({
@@ -29,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send({ message: "hi" });
 });
-const server = http.createServer(credentials, app);
+const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
 require("./routes/user.routes.js")(app);
@@ -37,7 +33,6 @@ require("./routes/auth.routes.js")(app);
 require("./routes/cityscore.routes.js")(app);
 require("./routes/world.routes.js")(app);
 require("./routes/questions.routes.js")(app);
-require("./routes/download.routes.js")(app);
 require("./routes/country.routes.js")(app);
 server.listen(process.env.PORT, () =>
   console.log(`Server listening on port ${process.env.PORT}`)
