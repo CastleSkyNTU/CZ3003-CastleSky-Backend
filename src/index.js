@@ -31,7 +31,7 @@ app.get("/", (req, res) => {
 });
 const server = http.createServer(credentials, app);
 const wss = new WebSocket.Server({ server });
-
+//fordeploy
 require("./routes/user.routes.js")(app);
 require("./routes/auth.routes.js")(app);
 require("./routes/cityscore.routes.js")(app);
