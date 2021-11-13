@@ -9,14 +9,6 @@ const CityScore = function (cityScore) {
 };
 
 CityScore.create = (newCityScore, result) => {
-  sql.query(
-    "DELETE FROM cityScores WHERE CountryId = ? and UserId = ?",
-    newCityScore.CountryId,
-    newCityScore.UserId,
-    (err, res) => {
-      console.log("deleted cityScore with id: ", id);
-    }
-  );
   sql.query("INSERT INTO CityScore SET ?", newCityScore, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -106,8 +98,8 @@ CityScore.loadLeaderBoard = (result) => {
   );
 };
 
-CityScore.loadLeaderBoardByCountry = (CountryName,result) => {
-  CountryName = CountryName.split('_').join(' ')
+CityScore.loadLeaderBoardByCountry = (CountryName, result) => {
+  CountryName = CountryName.split("_").join(" ");
   sql.query(
     `select UserName, Score from CityScore
     join CountryCity using (CountryId)
@@ -130,7 +122,7 @@ CityScore.loadLeaderBoardByCountry = (CountryName,result) => {
 };
 
 CityScore.getSummaryReport = (CountryName, ClassName, result) => {
-  CountryName = CountryName.split('_').join(' ')
+  CountryName = CountryName.split("_").join(" ");
   sql.query(
     `select UserName, Score from CityScore 
     join CountryCity using (CountryId)
