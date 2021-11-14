@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "f700f5b1-dd98-44b6-8199-25e564830b8c",
+		"name": "SSAD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/questions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"MinigameQuestionBankId\");",
+							"    pm.expect(pm.response.text()).to.include(\"MinigameId\");",
+							"    pm.expect(pm.response.text()).to.include(\"MinigameQuestionId\");",
+							"    pm.expect(pm.response.text()).to.include(\"Questions\");",
+							"    pm.expect(pm.response.text()).to.include(\"Answers\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/questions",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"questions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/questions/:questionId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Questions\");",
+							"    pm.expect(pm.response.text()).to.include(\"Answers\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/questions/3",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"questions",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/userClasses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/userClasses",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"userClasses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getClassWorlds/:className",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getClassWorlds/3A",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getClassWorlds",
+						"3A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getStudentWorlds/:userId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getStudentWorlds/1",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getStudentWorlds",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getWorldCountries/:worldName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getWorldCountries/Math",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getWorldCountries",
+						"Math"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getSummaryReport/:countryName/:className",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"UserName\");",
+							"    pm.expect(pm.response.text()).to.include(\"Score\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getSummaryReport/Whole_Numbers/3A",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getSummaryReport",
+						"Whole_Numbers",
+						"3A"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/world",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/world",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"world"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAccessCode/:countryName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches data type\", function () {",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.be.an(\"array\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getAccessCode/Whole_Numbers",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getAccessCode",
+						"Whole_Numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getLeaderBoardByCountry/:countryName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"UserName\");",
+							"    pm.expect(pm.response.text()).to.include(\"Score\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/getLeaderBoardByCountry/Whole_Numbers",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"getLeaderBoardByCountry",
+						"Whole_Numbers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"james\",\n    \"email\": \"key in your own email here to test the script\",\n    \"password\": \"asdfghjk\",\n    \"RoleId\": 1,\n    \"Class\": \"3A\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/register",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"UserId\");",
+							"    pm.expect(pm.response.text()).to.include(\"RoleId\");",
+							"    pm.expect(pm.response.text()).to.include(\"UserName\");",
+							"    pm.expect(pm.response.text()).to.include(\"ClassId\");",
+							"    pm.expect(pm.response.text()).to.include(\"CharacterName\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"zzz@zzz.com\",\n    \"password\": \"asdfghjk\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/login",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/updateScore",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"1.1 Status test\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"1.2 Body matches strings\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"id\");",
+							"    pm.expect(pm.response.text()).to.include(\"CountryId\");",
+							"    pm.expect(pm.response.text()).to.include(\"UserId\");",
+							"    pm.expect(pm.response.text()).to.include(\"Score\");",
+							"    pm.expect(pm.response.text()).to.include(\"Date\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"countryName\": \"Whole Numbers\",\n    \"userId\": 1,\n    \"score\": 33\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ec2-3-138-111-170.us-east-2.compute.amazonaws.com:3333/updateScore",
+					"protocol": "http",
+					"host": [
+						"ec2-3-138-111-170",
+						"us-east-2",
+						"compute",
+						"amazonaws",
+						"com"
+					],
+					"port": "3333",
+					"path": [
+						"updateScore"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
