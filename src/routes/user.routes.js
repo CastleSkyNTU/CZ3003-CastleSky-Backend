@@ -7,9 +7,6 @@ module.exports = (app) => {
   // Retrieve all Users
   app.get("/users", users.findAll);
 
-  // Retrieve Top 20 Users
-  app.get("/userstop20", users.findTop20);
-
   // Retrieve list of classes
   app.get("/userClasses", users.findClasses);
 
@@ -22,6 +19,6 @@ module.exports = (app) => {
   // Delete a User with userId
   app.delete("/users/:userId", users.delete);
 
-  // Create a new User
+  // Delete a User
   app.delete("/users", users.deleteAll);
 };

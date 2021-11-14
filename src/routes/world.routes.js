@@ -1,15 +1,13 @@
 module.exports = (app) => {
   const world = require("../controllers/world.controller.js");
 
-  // Create a new User
-  app.post("/users", world.create);
-
-  // Retrieve all Users
+  // Retrieve all Worlds
   app.get("/world", world.findAll);
-
+  
+  // Retrieve country code
   app.get("/loadCountryCode", world.loadCountryCode);
 
-  // Retrieve Top 20 Users
+  // Retrieve Worlds based on user Id
   app.get("/getUserWorlds/:userId", world.getUserWorlds);
 
   // Retrieve the worlds a class has access to
@@ -21,15 +19,6 @@ module.exports = (app) => {
   // Retrieve the countries the world has
   app.get("/getWorldCountries/:worldName", world.getWorldCountries);
 
-  // Retrieve a single User with userId
+  // Retrieve a single world with worldid
   app.get("/loadWorldData/:worldId", world.loadWorldData);
-
-  // Update a User with userId
-  app.put("/users/:userId", world.update);
-
-  // Delete a User with userId
-  app.delete("/users/:userId", world.delete);
-
-  // Create a new User
-  app.delete("/users", world.deleteAll);
 };
